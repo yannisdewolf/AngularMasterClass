@@ -11,11 +11,10 @@ export class CapitalcasePipe implements PipeTransform {
     }
 
 
-    let lowerc = value.toLowerCase();
+    const lowercaseStrings = value.toLowerCase().split(' ');
 
-    let strings = lowerc.split(' ');
-
-    const elems: string[] = strings.slice(1, strings.length).map(elem => {
+    const firstCapitalizedWord = [this.uppercaseFirstCharacter(lowercaseStrings[0])];
+    const capitalizedElements: string[] = lowercaseStrings.slice(1, lowercaseStrings.length).map(elem => {
 
       if (elem === 'of' || elem === 'the') {
         return elem;
@@ -24,9 +23,7 @@ export class CapitalcasePipe implements PipeTransform {
       return this.uppercaseFirstCharacter(elem);
     });
 
-    elems.unshift(this.uppercaseFirstCharacter(strings[0]));
-
-    return elems.join(' ');
+    return firstCapitalizedWord.concat(capitalizedElements).join(' ');
 
 
   }
