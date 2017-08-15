@@ -1,18 +1,22 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   template: `
-    <input #email type='text' (keyup.enter)='onKeyUp(email.value)'>
+    <input type='text' (keyup.enter)='email = $event.target.value; onKeyUp()' [value]='email'>
+
+
+    <input [(ngModel)]='email' (keyup.enter)='onKeyUp()'>
   `
   ,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
+  email = 'me@example.com';
 
-  onKeyUp(email) {
-    console.log(email);
+  onKeyUp() {
+    console.log(this.email);
   }
 
 }
