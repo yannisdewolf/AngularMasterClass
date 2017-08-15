@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { SummaryPipe } from './summary.pipe';
+import { CapitalcasePipe } from './capitalcase.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SummaryPipe
+    SummaryPipe,
+    CapitalcasePipe
   ],
   imports: [
     BrowserModule,

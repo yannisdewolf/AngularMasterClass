@@ -3,6 +3,13 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
+    
+    <input type='text' [(ngModel)]='titel'> <br>
+    
+    {{titel | capitalcase}}
+    
+    <br>
+    
     <i [ngClass]="{'fa':true, 'fa-star-o': !fullIcon, 'fa-star': fullIcon }" aria-hidden='true'
        (click)='switchIcon()'></i>
     
@@ -14,6 +21,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  titel = '';
 
   fullIcon = true;
 
