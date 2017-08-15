@@ -3,12 +3,19 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-       {{text | summary: 60 : 'SAMENVATTING'}}
+    <i [ngClass]="{'fa':true, 'fa-star-o': !fullIcon, 'fa-star': fullIcon }" aria-hidden='true'
+       (click)='switchIcon()'></i>
+    
+    <i class='fa' [class.fa-star-o]="!fullIcon" [class.fa-star]="fullIcon" aria-hidden='true'
+       (click)='switchIcon()'></i>
+
   `
   ,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  fullIcon = true;
 
   text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis magna tortor,' +
     ' auctor ut nibh a, lobortis ullamcorper lorem. Vivamus vel vulputate nunc. Mauris eu tortor ' +
@@ -17,6 +24,9 @@ export class AppComponent {
     'sem eleifend et.';
 
 
+  switchIcon() {
+    this.fullIcon = !this.fullIcon;
+  }
 }
 
 
