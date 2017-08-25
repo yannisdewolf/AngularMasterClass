@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FavoriteChangeEventArgs} from "./favorite/favorite.component";
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  post = {
+    title: "Title",
+    isFavorite: true
+  }
+
   titel = '';
 
 
+  sayhello(eventArgs: FavoriteChangeEventArgs) {
+    console.log('favorite change: ' , eventArgs.newValue);
+  }
 }
 
 

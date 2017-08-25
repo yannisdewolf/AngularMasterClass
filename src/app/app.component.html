@@ -1,6 +1,4 @@
-<app-capitalizer></app-capitalizer>
-
-<app-favorite></app-favorite>
+<app-favorite [isFavorite] = "post.isFavorite" (change)="sayhello($event)"></app-favorite>
 
 
 
