@@ -8,11 +8,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class FavoriteComponent implements OnInit {
 
 
-  @Output()
-  change = new EventEmitter();
 
   @Input('isFavorite')
   isSelected ;
+  @Output('change')
+  click = new EventEmitter();
 
   constructor() {
   }
@@ -23,7 +23,7 @@ export class FavoriteComponent implements OnInit {
 
   switchIcon() {
     this.isSelected = !this.isSelected;
-    this.change.emit({ newValue: this.isSelected});
+    this.click.emit({ newValue: this.isSelected});
   }
 
 }
