@@ -5,12 +5,16 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { SummaryPipe } from './summary.pipe';
 import { CapitalcasePipe } from './capitalcase.pipe';
+import { FavoriteComponent } from './favorite/favorite.component';
+import { CapitalizerComponent } from './capitalizer/capitalizer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SummaryPipe,
-    CapitalcasePipe
+    CapitalcasePipe,
+    FavoriteComponent,
+    CapitalizerComponent
   ],
   imports: [
     BrowserModule,
