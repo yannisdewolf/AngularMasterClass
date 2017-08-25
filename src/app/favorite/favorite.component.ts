@@ -5,7 +5,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.css']
 })
-export class FavoriteComponent implements OnInit {
+export class FavoriteComponent {
 
 
 
@@ -13,13 +13,6 @@ export class FavoriteComponent implements OnInit {
   isSelected ;
   @Output('change')
   click = new EventEmitter();
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
 
   switchIcon() {
     this.isSelected = !this.isSelected;
