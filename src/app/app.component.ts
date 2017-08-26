@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
-  canSave: boolean = true;
+  canSave: boolean = false;
 
   viewMode = 'somethingElse';
 
