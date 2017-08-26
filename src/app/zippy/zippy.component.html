@@ -1,0 +1,21 @@
+<div style="border: 1px black dashed;">
+<div (click)="switch()"
+     [class.opendetail]="showDetail"
+     [class.closeddetail]="!showDetail"
+     style="padding: 1em; cursor: pointer; height: 3em"
+>
+  <b>{{title}}</b>
+  <i class="fa"
+     [ngClass]="{
+        'fa-chevron-down': !showDetail,
+        'fa-chevron-up': showDetail
+      }"
+
+  ></i>
+</div>
+
+<div *ngIf="showDetail" style="margin: 1em">
+  <ng-content></ng-content>
+</div>
+
+</div>

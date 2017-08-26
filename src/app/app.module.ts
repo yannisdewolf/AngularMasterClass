@@ -10,6 +10,7 @@ import { CapitalizerComponent } from './capitalizer/capitalizer.component';
 import { PanelComponent } from './panel/panel.component';
 import { LikecounterComponent } from './likecounter/likecounter.component';
 import { InputFormatDirective } from './input-format.directive';
+import { ZippyComponent } from './zippy/zippy.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InputFormatDirective } from './input-format.directive';
     CapitalizerComponent,
     PanelComponent,
     LikecounterComponent,
-    InputFormatDirective
+    InputFormatDirective,
+    ZippyComponent
   ],
   imports: [
     BrowserModule,
