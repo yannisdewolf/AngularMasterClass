@@ -9,6 +9,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { CapitalizerComponent } from './capitalizer/capitalizer.component';
 import { PanelComponent } from './panel/panel.component';
 import { LikecounterComponent } from './likecounter/likecounter.component';
+import { InputFormatDirective } from './input-format.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LikecounterComponent } from './likecounter/likecounter.component';
     FavoriteComponent,
     CapitalizerComponent,
     PanelComponent,
-    LikecounterComponent
+    LikecounterComponent,
+    InputFormatDirective
   ],
   imports: [
     BrowserModule,
