@@ -8,6 +8,7 @@ import { CapitalcasePipe } from './capitalcase.pipe';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { CapitalizerComponent } from './capitalizer/capitalizer.component';
 import { PanelComponent } from './panel/panel.component';
+import { LikecounterComponent } from './likecounter/likecounter.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PanelComponent } from './panel/panel.component';
     CapitalcasePipe,
     FavoriteComponent,
     CapitalizerComponent,
-    PanelComponent
+    PanelComponent,
+    LikecounterComponent
   ],
   imports: [
     BrowserModule,

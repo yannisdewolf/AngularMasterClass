@@ -8,6 +8,12 @@ import {FavoriteChangeEventArgs} from './favorite/favorite.component';
 })
 export class AppComponent {
 
+  tweet = {
+    body: 'Here is the body of a tweet',
+    isLiked: false,
+    likesCount: 10
+  };
+
   post = {
     title: 'Title',
     isFavorite: true
@@ -16,8 +22,9 @@ export class AppComponent {
   titel = '';
 
 
-  sayhello(eventArgs: FavoriteChangeEventArgs) {
-    console.log('favorite change: ' , eventArgs);
+  liked(args: boolean) {
+    this.tweet.isLiked = args;
+    this.tweet.likesCount += args ? 1 : -1;
   }
 }
 

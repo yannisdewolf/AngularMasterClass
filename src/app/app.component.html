@@ -1,3 +1,15 @@
+<app-like [likesCount]="tweet.likesCount"
+          [isActive]="tweet.isLiked"
+          (heartclick)="liked($event)"
+></app-like>
+
+<pre>
+
+  in parent component:
+    likeCount: {{tweet.likesCount}}
+    isLiked: {{tweet.isLiked}}
+</pre>
+
 <app-panel>
 
   <ng-container class="heading">Heading</ng-container>

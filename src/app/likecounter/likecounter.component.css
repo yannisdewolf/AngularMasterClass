@@ -1,0 +1,11 @@
+.selected {
+  color: deeppink;
+}
+
+.initial {
+  color: #CCC;
+}
+
+.clickable {
+  cursor: pointer;
+}
