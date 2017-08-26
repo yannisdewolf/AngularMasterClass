@@ -14,3 +14,15 @@
   <div *ngSwitchCase="'list'">List View Content</div>
   <div *ngSwitchDefault="">Otherwise</div>
 </div>
+
+<div>
+
+  <button (click)="onAdd()">Add</button>
+
+<ul>
+  <li *ngFor="let course of courses; index as i; even as isEven"> <!-- index = keyword (exported value)  local variable i -->
+    <span [class.evenRow]="isEven">{{i}} - {{ course.name }}</span> <button (click)="onChange(course)">Remove</button>
+  </li>
+</ul>
+
+</div>
