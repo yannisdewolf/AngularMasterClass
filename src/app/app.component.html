@@ -1,19 +1,16 @@
-<div [hidden]="courses.length == 0">
-  List of courses
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [class.active]="viewMode == 'map'"><a class="nav-link clickable" (click)="viewMode = 'map'">Map View</a></li>
+      <li class="nav-item" [class.active]="viewMode == 'list'"><a class="nav-link clickable" (click)="viewMode = 'list'">List View</a></li>
+    </ul>
+  </div>
+
+</nav>
+
+<div [ngSwitch]="viewMode">
+  <div *ngSwitchCase="'map'">Map View Content</div>
+  <div *ngSwitchCase="'list'">List View Content</div>
+  <div *ngSwitchDefault="">Otherwise</div>
 </div>
-
-<div [hidden]="courses.length > 0">
-  No courses yet
-</div>
-
-<p></p>
-
-<pre>
-hidden vs ngif:
-small tree:
-large tree:
-- building tree costly? hidden
- anders ngIf, free up resources
-Angular gaat steeds proberen om view in sync met model te houden. Ook hidden DOM elementen worden gecheckt.
-hidden heeft dus negatieve impact op performantie.
-</pre>
