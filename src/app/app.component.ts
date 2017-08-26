@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
-  courses = [1, 2];
+  courses = [];
 
 }
 
