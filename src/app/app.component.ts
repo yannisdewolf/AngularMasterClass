@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {FavoriteChangeEventArgs} from './favorite/favorite.component';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,24 +7,8 @@ import {FavoriteChangeEventArgs} from './favorite/favorite.component';
 })
 export class AppComponent {
 
-  tweet = {
-    body: 'Here is the body of a tweet',
-    isLiked: false,
-    likesCount: 10
-  };
+  courses = [1, 2];
 
-  post = {
-    title: 'Title',
-    isFavorite: true
-  };
-
-  titel = '';
-
-
-  liked(args: boolean) {
-    this.tweet.isLiked = args;
-    this.tweet.likesCount += args ? 1 : -1;
-  }
 }
 
 

@@ -1,26 +1,7 @@
-<app-like [likesCount]="tweet.likesCount"
-          [isActive]="tweet.isLiked"
-          (heartclick)="liked($event)"
-></app-like>
+<div *ngIf="courses.length > 0">
+  List of courses
+</div>
 
-<pre>
-
-  in parent component:
-    likeCount: {{tweet.likesCount}}
-    isLiked: {{tweet.isLiked}}
-</pre>
-
-<app-panel>
-
-  <ng-container class="heading">Heading</ng-container>
-
-  <div class="body">
-    <h2>Body</h2>
-    <p>some content here...</p>
-  </div>
-
-</app-panel>
-
-
-
-
+<div *ngIf="courses.length === 0">
+  No courses yet
+</div>
