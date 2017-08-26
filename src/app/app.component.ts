@@ -7,6 +7,8 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
+  canSave: boolean = true;
+
   viewMode = 'somethingElse';
 
   courses = [];
