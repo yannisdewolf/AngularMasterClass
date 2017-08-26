@@ -5,3 +5,15 @@
 <div [hidden]="courses.length > 0">
   No courses yet
 </div>
+
+<p></p>
+
+<pre>
+hidden vs ngif:
+small tree:
+large tree:
+- building tree costly? hidden
+ anders ngIf, free up resources
+Angular gaat steeds proberen om view in sync met model te houden. Ook hidden DOM elementen worden gecheckt.
+hidden heeft dus negatieve impact op performantie.
+</pre>
