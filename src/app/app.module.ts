@@ -7,6 +7,7 @@ import { SummaryPipe } from './summary.pipe';
 import { CapitalcasePipe } from './capitalcase.pipe';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { CapitalizerComponent } from './capitalizer/capitalizer.component';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CapitalizerComponent } from './capitalizer/capitalizer.component';
     SummaryPipe,
     CapitalcasePipe,
     FavoriteComponent,
-    CapitalizerComponent
+    CapitalizerComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
