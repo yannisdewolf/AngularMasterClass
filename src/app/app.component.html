@@ -17,10 +17,10 @@
 
 <div>
 
-  <button (click)="onAdd()">Add</button>
+  <button (click)="loadCourses()">Load Courses</button>
 
 <ul>
-  <li *ngFor="let course of courses; index as i; even as isEven"> <!-- index = keyword (exported value)  local variable i -->
+  <li *ngFor="let course of courses; index as i; even as isEven; trackBy: trackCourse"> <!-- index = keyword (exported value)  local variable i -->
     <span [class.evenRow]="isEven">{{i}} - {{ course.name }}</span> <button (click)="onChange(course)">Remove</button>
   </li>
 </ul>
