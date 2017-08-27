@@ -9,15 +9,14 @@ import {NgForm} from '@angular/forms';
 export class ContactFormComponent {
 
   log(x) {
-    console.log(x)
+    console.log(x);
   }
 
   submit(f: NgForm) {
-    if (f.valid) {
-      let form = f.form;
-      let firstName = form.controls.firstName;
-      console.log('firstName ', f.value.contact.firstName);
       console.log(f);
+
+    if (f.valid) {
+      console.log('formdata ', f.value);
     } else {
       console.log('not doing anything... form is not valid');
     }
