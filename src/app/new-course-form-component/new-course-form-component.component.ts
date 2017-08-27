@@ -17,11 +17,20 @@ export class NewCourseFormComponentComponent {
         email: [],
         phone: []
       }),
-      topics: fb.array([])
+      topics: fb.array([{value: 'eten'}, {value: 'slapen'}])
     });
   }
 
   get topics() {
     return this.form.get('topics').controls
+  }
+
+  submit(form) {
+    console.log('hello world');
+    console.log(form.value);
+  }
+
+  addTopic() {
+
   }
 }
