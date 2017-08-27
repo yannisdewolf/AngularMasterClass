@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SummaryPipe } from './summary.pipe';
 import { CapitalcasePipe } from './capitalcase.pipe';
 import { FavoriteComponent } from './favorite/favorite.component';
@@ -32,7 +32,8 @@ import {SignupFormComponent} from './sigupform/signup-form.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
