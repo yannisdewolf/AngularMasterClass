@@ -20,4 +20,8 @@ export class NewCourseFormComponentComponent {
       topics: fb.array([])
     });
   }
+
+  get topics() {
+    return this.form.get('topics').controls
+  }
 }
