@@ -50,12 +50,13 @@
   <div class="form-group">
     <label for="contactMethod">ContactMehod</label>
     <select
+      multiple
       ngModel
       name="contactMethod"
       id="contactMethod"
       class="form-control">
       <option value=""></option>
-      <option  *ngFor="let method of contactMethods" [ngValue]="method">{{method.name}}</option>
+      <option  *ngFor="let method of contactMethods" [value]="method.id">{{method.name}}</option>
     </select>
   </div>
 
