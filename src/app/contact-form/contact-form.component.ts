@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, NgForm} from '@angular/forms';
+import {Component} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-contact-form',
@@ -13,10 +13,14 @@ export class ContactFormComponent {
   }
 
   submit(f: NgForm) {
-    let form = f.form;
-    let firstName = form.controls.firstName;
-    console.log('firstName ', f.value.firstName);
-    console.log(f);
+    if (f.valid) {
+      let form = f.form;
+      let firstName = form.controls.firstName;
+      console.log('firstName ', f.value.contact.firstName);
+      console.log(f);
+    } else {
+      console.log('not doing anything... form is not valid');
+    }
   }
 
 }
