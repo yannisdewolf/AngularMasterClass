@@ -16,6 +16,8 @@ import { CourseformComponent } from './courseform/courseform.component';
 import {SignupFormComponent} from './sigupform/signup-form.component';
 import { NewCourseFormComponentComponent } from './new-course-form-component/new-course-form-component.component';
 import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
+import { PostsComponent } from './posts/posts.component';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -32,12 +34,14 @@ import { ChangePasswordFormComponent } from './change-password-form/change-passw
     CourseformComponent,
     SignupFormComponent,
     NewCourseFormComponentComponent,
-    ChangePasswordFormComponent
+    ChangePasswordFormComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
