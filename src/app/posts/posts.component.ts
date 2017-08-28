@@ -32,4 +32,13 @@ export class PostsComponent {
     );
   }
 
+  updatePost(post: any) {
+    // update few properties instead of full object
+    this.http.patch(this.url + '/' + post.id, JSON.stringify({isRead: true}))
+      .subscribe(response => {
+        console.log(response);
+      });
+
+    // this.http.put(this.url, JSON.stringify(post));
+  }
 }
