@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {SignupformValidators} from '../sigupform/signupform-validators';
 
 @Component({
@@ -8,6 +8,7 @@ import {SignupformValidators} from '../sigupform/signupform-validators';
   styleUrls: ['./change-password-form.component.css']
 })
 export class ChangePasswordFormComponent implements OnInit {
+form2;
 
   form = new FormGroup({
     oldPassword: new FormControl('', [Validators.required], [SignupformValidators.validateExistingAsync] ),
@@ -18,7 +19,23 @@ export class ChangePasswordFormComponent implements OnInit {
 
   });
 
-  constructor() { }
+  constructor(fb: FormBuilder) {
+
+    this.form2 = fb.group({
+      adres: fb.group({
+        straat: ['', Validators.required],
+        huisnummer: [''],
+        busnummer: [''],
+        gemeente: fb.group({
+          postcode: [''],
+          gemeentenaam: ['']
+        })
+      }),
+      naam: fb.control(''),
+      voornaam: fb.control('')
+    });
+
+  }
 
   ngOnInit() {
   }

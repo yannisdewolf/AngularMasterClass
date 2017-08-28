@@ -6,7 +6,7 @@ export class SignupformValidators {
   static validateExistingAsync(control: AbstractControl): Promise<ValidationErrors | null> {
     return new Promise((resolve, reject) => {
 
-      const currentValue = control.value as string;
+      const currentValue = control.value as string; //geen casting nodig
       console.log('current value', currentValue);
       if (currentValue !== '12345') {
         resolve({wrongCurrentPassword: true});
@@ -27,8 +27,8 @@ export class SignupformValidators {
 
   static validateNewChosenPassword(control: AbstractControl): ValidationErrors | null {
 
-    const newChosen = (control as FormGroup).value['newPassword'] as string;
-    const confirmation = (control as FormGroup).value['confirmPassword'] as string;
+    const newChosen = control.get('newPassword').value as string;
+    const confirmation = control.value['confirmPassword'] as string;
 
     if (newChosen !== confirmation) {
       return {notSameNewPassword: true};
