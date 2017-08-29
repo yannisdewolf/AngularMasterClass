@@ -1,0 +1,15 @@
+<input
+  (keyup.enter)="search(title)" #title
+  type="text" class="form-control">
+
+<ul class="list-group">
+  <li
+    *ngFor="let post of answer"
+    class="list-group-item">
+    {{post.title}}
+    <img [src]="post.link" alt="" width="200px">
+    <button
+      (click)="updatePost(post)"
+      class="btn btn-default btn-sm">Update</button>
+  </li>
+</ul>
