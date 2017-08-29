@@ -19,6 +19,7 @@ import {ChangePasswordFormComponent} from './change-password-form/change-passwor
 import {PostsComponent} from './posts/posts.component';
 import {HttpModule} from '@angular/http';
 import {ImgurComponent} from './imgur/imgur.component';
+import {PostService} from './services/post.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import {ImgurComponent} from './imgur/imgur.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

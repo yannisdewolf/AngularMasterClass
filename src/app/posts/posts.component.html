@@ -7,8 +7,12 @@
     *ngFor="let post of posts"
     class="list-group-item">
     <button
+      (click)="updatePost(post)"
+      class="btn btn-info btn-sm" [disabled]="post.isRead">Mark as Read</button>
+    <button
       (click)="deletePost(post)"
-      class="btn btn-default btn-sm">Delete</button>
-    {{post.title}}
+      class="btn btn-danger btn-sm">Delete</button>
+
+    <span [class.bold]="!post.isRead">{{post.title}}</span>
   </li>
 </ul>
