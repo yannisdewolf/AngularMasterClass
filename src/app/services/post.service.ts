@@ -20,15 +20,13 @@ export class PostService {
   }
 
   createPost(post: any): Observable<any> {
-    return Observable.throw(new BadInput('BAD INPUT!'));
-
-    /*return this.http.post(this.url, JSON.stringify(post))
+    return this.http.post(this.url, JSON.stringify(post))
       .catch((error: Response) => {
         if (error.status === 400) {
           return Observable.throw(new BadInput(error.json()));
         }
         return Observable.throw(new AppError(error.json()));
-      });*/
+      });
   }
 
   markAsRead(post: any): Observable<any> {

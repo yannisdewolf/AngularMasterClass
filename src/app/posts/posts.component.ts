@@ -3,7 +3,7 @@ import {PostService} from '../services/post.service';
 import {AppError} from '../common/app-error';
 import {NotFoundError} from '../common/not-found-error';
 import {BadInput} from '../common/bad-input-error';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-posts',
@@ -19,7 +19,7 @@ export class PostsComponent implements OnInit {
   errorOccured: boolean;
 
   constructor(private service: PostService, fb: FormBuilder) {
-    this.form = fb.group( {
+    this.form = fb.group({
       postTitle: ['', [Validators.required, Validators.minLength(5)]]
     });
 
@@ -36,29 +36,57 @@ export class PostsComponent implements OnInit {
       .subscribe(
         response => {
           this.posts = response.json();
-        },
-        error => {
-          this.errorOccured = true;
         });
   }
 
-  createPost(input: HTMLInputElement) {
-    const post = {title: input.value};
-    input.value = '';
+  submitThePost(form: NgForm) {
 
-    this.persist(post);
 
+    console.log('form: ', form);
+
+    console.log('submitting the post with value: ' + this.form.get('postTitle').value);
+
+    const post = {title: this.form.value.postTitle};
+
+    if (this.form.get('postTitle').valid) {
+      this.postTitle.setValue('');
+      this.persist(post);
+    } else {
+      console.log('form is not valid');
+    }
 
   }
 
-  submitThePost() {
+  updatePost(post: any) {
+    // update few properties instead of full object
+    this.service.markAsRead(post)
+      .subscribe(
+        response => {
+          const index = this.posts.indexOf(post);
+          this.posts[index]['isRead'] = true;
+        });
 
-    console.log(this.form.get('postTitle').value);
+  }
 
-    const post = {title: this.form.value.postTitle };
+  deletePost(post: any) {
+    this.service.deletePost(post.id)
+    //this.service.deletePost(345)
+      .subscribe(
+        response => {
+          const index = this.posts.indexOf(post);
+          this.posts.splice(index, 1);
+        },
+        (error: AppError) => {
+          if (error instanceof NotFoundError) {
+            alert('This post has already been deleted');
+          } else {
+            throw error;
+          }
+        });
+  }
 
-    this.persist(post);
-
+  dismissError() {
+    this.errorOccured = false;
   }
 
   private persist(post) {
@@ -74,46 +102,10 @@ export class PostsComponent implements OnInit {
             console.log('bad input: ', error.originalError);
             this.form.setErrors(error.originalError); //set errors on form
           } else {
-            console.log('error occured', error);
+            throw error;
           }
         }
       );
-  }
-
-  updatePost(post: any) {
-    // update few properties instead of full object
-    this.service.markAsRead(post)
-      .subscribe(
-        response => {
-          const index = this.posts.indexOf(post);
-          this.posts[index]['isRead'] = true;
-        },
-        error => {
-          console.log('error occured', error)
-        });
-
-  }
-
-  deletePost(post: any) {
-    //this.service.deletePost(post.id)
-    this.service.deletePost(345)
-      .subscribe(
-        response => {
-          const index = this.posts.indexOf(post);
-          this.posts.splice(index, 1);
-        },
-        (error: AppError) => {
-          if (error instanceof NotFoundError) {
-            alert('This post has already been deleted');
-          } else {
-            this.errorOccured = true;
-            console.log(error);
-          }
-        });
-  }
-
-  dismissError() {
-    this.errorOccured = false;
   }
 
 

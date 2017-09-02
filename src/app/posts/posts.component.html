@@ -1,5 +1,8 @@
 <form
-  [formGroup]="form">
+  [formGroup]="form"
+  #f="ngForm"
+  (ngSubmit)="submitThePost(f)"
+>
 
   <input
     id="postTitle"
@@ -7,11 +10,10 @@
     formControlName="postTitle"
     class="form-control"
     placeholder="title to add (press <enter> to submit)"
-    (keyup.enter)="submitThePost()"
   >
 
   <div
-    *ngIf="postTitle.touched && postTitle.invalid"
+    *ngIf="postTitle.touched && postTitle.invalid "
     class="alert alert-danger"
   >
     <div *ngIf="postTitle.errors.required">
@@ -23,7 +25,7 @@
   </div>
 
   <div
-    *ngIf="form.errors"
+    *ngIf="form.invalid && form.touched && !form.dirty "
     class="alert alert-danger"
   >
     something went wrong... {{form.errors}}
@@ -38,11 +40,7 @@
 
 <hr>
 
-<input
-  (keyup.enter)="createPost(title)" #title
-  type="text" class="form-control">
-
-<div class="alert alert-warning alert-dismissible fade " [class.show]="errorOccured" role="alert">
+<div *ngIf="errorOccured" class="alert alert-warning alert-dismissible fade " [class.show]="errorOccured" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"
   (click)="dismissError()">
     <span aria-hidden="true">&times;</span>

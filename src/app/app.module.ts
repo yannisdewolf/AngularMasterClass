@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -20,6 +20,7 @@ import {PostsComponent} from './posts/posts.component';
 import {HttpModule} from '@angular/http';
 import {ImgurComponent} from './imgur/imgur.component';
 import {PostService} from './services/post.service';
+import {AppErrorHandler} from './common/app-error-handler';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,10 @@ import {PostService} from './services/post.service';
     HttpModule
   ],
   providers: [
-    PostService
+    PostService,
+    {
+      provide: ErrorHandler, useClass: AppErrorHandler //use AppErrorHandler where ErrorHandler is used by Angular
+    }
   ],
   bootstrap: [AppComponent]
 })
