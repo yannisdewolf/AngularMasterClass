@@ -1,5 +1,42 @@
+<form
+  [formGroup]="form">
 
+  <input
+    id="postTitle"
+    type="text"
+    formControlName="postTitle"
+    class="form-control"
+    placeholder="title to add (press <enter> to submit)"
+    (keyup.enter)="submitThePost()"
+  >
 
+  <div
+    *ngIf="postTitle.touched && postTitle.invalid"
+    class="alert alert-danger"
+  >
+    <div *ngIf="postTitle.errors.required">
+      Post title is required
+    </div>
+    <div *ngIf="postTitle.errors.minlength">
+      Post must be at least 5 long.
+    </div>
+  </div>
+
+  <div
+    *ngIf="form.errors"
+    class="alert alert-danger"
+  >
+    something went wrong... {{form.errors}}
+
+  </div>
+
+</form>
+<hr>
+
+<p>value: {{form.value | json}}</p>
+<p>errors: {{form.errors | json}}</p>
+
+<hr>
 
 <input
   (keyup.enter)="createPost(title)" #title

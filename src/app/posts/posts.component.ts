@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from '../services/post.service';
+import {AppError} from '../common/app-error';
+import {NotFoundError} from '../common/not-found-error';
+import {BadInput} from '../common/bad-input-error';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-posts',
@@ -8,11 +12,22 @@ import {PostService} from '../services/post.service';
 })
 export class PostsComponent implements OnInit {
 
+  form: FormGroup;
+
   posts: any[];
 
   errorOccured: boolean;
 
-  constructor(private service: PostService) {
+  constructor(private service: PostService, fb: FormBuilder) {
+    this.form = fb.group( {
+      postTitle: ['', [Validators.required, Validators.minLength(5)]]
+    });
+
+  }
+
+
+  get postTitle() {
+    return this.form.get('postTitle');
   }
 
   ngOnInit(): void {
@@ -31,6 +46,22 @@ export class PostsComponent implements OnInit {
     const post = {title: input.value};
     input.value = '';
 
+    this.persist(post);
+
+
+  }
+
+  submitThePost() {
+
+    console.log(this.form.get('postTitle').value);
+
+    const post = {title: this.form.value.postTitle };
+
+    this.persist(post);
+
+  }
+
+  private persist(post) {
     this.service.createPost(post)
       .subscribe(
         response => {
@@ -38,9 +69,10 @@ export class PostsComponent implements OnInit {
           this.posts.splice(0, 0, post);
           console.log('response after post ', response.json());
         },
-        (error: Response) => {
-          if(error.status === 400) {
-            //this.form.setErrors(error.json()); //set errors on form
+        (error: AppError) => {
+          if (error instanceof BadInput) {
+            console.log('bad input: ', error.originalError);
+            this.form.setErrors(error.originalError); //set errors on form
           } else {
             console.log('error occured', error);
           }
@@ -70,8 +102,8 @@ export class PostsComponent implements OnInit {
           const index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
         },
-        (error: Response) => {
-          if(error.status === 404) {
+        (error: AppError) => {
+          if (error instanceof NotFoundError) {
             alert('This post has already been deleted');
           } else {
             this.errorOccured = true;
@@ -83,4 +115,6 @@ export class PostsComponent implements OnInit {
   dismissError() {
     this.errorOccured = false;
   }
+
+
 }
