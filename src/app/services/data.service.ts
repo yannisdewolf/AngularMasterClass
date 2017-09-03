@@ -6,6 +6,7 @@ import 'rxjs/add/observable/throw';
 import {AppError} from '../common/app-error';
 import {NotFoundError} from '../common/not-found-error';
 import {BadInput} from '../common/bad-input-error';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
@@ -15,21 +16,25 @@ export class DataService {
 
   getAll(): Observable<any> {
     return this.http.get(this.url)
+      .map(response => response.json())
       .catch(this.handleError);
   }
 
   create(resource: any): Observable<any> {
     return this.http.post(this.url, JSON.stringify(resource))
+      .map(response => response.json())
       .catch(this.handleError);
   }
 
   update(resource: any): Observable<any> {
     return this.http.patch(this.url + '/' + resource.id, JSON.stringify({isRead: true}))
+      .map(response => response.json())
       .catch(this.handleError);
   }
 
   delete(id: number): Observable<any> {
     return this.http.delete(this.url + '/' + id)
+      .map(response => response.json())
       .catch(this.handleError);
   }
 

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from '../services/post.service';
 import {AppError} from '../common/app-error';
-import {NotFoundError} from '../common/not-found-error';
 import {BadInput} from '../common/bad-input-error';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ToasterService} from 'angular2-toaster';
+import {NotFoundError} from '../common/not-found-error';
 
 @Component({
   selector: 'app-posts',
@@ -23,9 +23,7 @@ export class PostsComponent implements OnInit {
     this.form = fb.group({
       postTitle: ['', [Validators.required, Validators.minLength(5)]]
     });
-
   }
-
 
   get postTitle() {
     return this.form.get('postTitle');
@@ -34,15 +32,10 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.errorOccured = false;
     this.service.getAll()
-      .subscribe(
-        response => {
-          this.posts = response.json();
-          this.toasterService.pop('success', 'SUCCESS!!', 'Content loaded, congratulations');
-        });
+      .subscribe(posts => this.posts = posts);
   }
 
   submitThePost(form: NgForm) {
-
 
     console.log('form: ', form);
 
@@ -63,7 +56,7 @@ export class PostsComponent implements OnInit {
     // update few properties instead of full object
     this.service.update(post)
       .subscribe(
-        response => {
+        updatedPost => {
           const index = this.posts.indexOf(post);
           this.posts[index]['isRead'] = true;
         });
@@ -71,20 +64,19 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(post: any) {
-    //this.service.deletePost(post.id)
-    this.service.delete(345)
+    this.service.delete(post.id)
+    //this.service.delete(345)
       .subscribe(
-        response => {
+        () => {
           const index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
         },
         (error: AppError) => {
-          throw error;
-          /*if (error instanceof NotFoundError) {
+          if (error instanceof NotFoundError) {
             alert('This post has already been deleted');
           } else {
             throw error;
-          }*/
+          }
         });
   }
 
@@ -95,10 +87,9 @@ export class PostsComponent implements OnInit {
   private persist(post) {
     this.service.create(post)
       .subscribe(
-        response => {
-          post['id'] = response.json().id;
+        createdPost => {
+          post['id'] = createdPost.id;
           this.posts.splice(0, 0, post);
-          console.log('response after post ', response.json());
         },
         (error: AppError) => {
           if (error instanceof BadInput) {
