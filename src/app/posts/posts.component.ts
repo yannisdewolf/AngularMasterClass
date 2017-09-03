@@ -3,7 +3,6 @@ import {PostService} from '../services/post.service';
 import {AppError} from '../common/app-error';
 import {BadInput} from '../common/bad-input-error';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import {ToasterService} from 'angular2-toaster';
 import {NotFoundError} from '../common/not-found-error';
 
 @Component({
@@ -19,7 +18,7 @@ export class PostsComponent implements OnInit {
 
   errorOccured: boolean;
 
-  constructor(private service: PostService, fb: FormBuilder, private toasterService: ToasterService) {
+  constructor(private service: PostService, fb: FormBuilder) {
     this.form = fb.group({
       postTitle: ['', [Validators.required, Validators.minLength(5)]]
     });
@@ -64,14 +63,16 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(post: any) {
+    const index = this.posts.indexOf(post);
+    this.posts.splice(index, 1);
+
     this.service.delete(post.id)
     //this.service.delete(345)
       .subscribe(
-        () => {
-          const index = this.posts.indexOf(post);
-          this.posts.splice(index, 1);
-        },
+        () => {},
         (error: AppError) => {
+          this.posts.splice(index, 0, post);
+
           if (error instanceof NotFoundError) {
             alert('This post has already been deleted');
           } else {
@@ -85,13 +86,14 @@ export class PostsComponent implements OnInit {
   }
 
   private persist(post) {
+    this.posts.splice(0, 0, post);
     this.service.create(post)
       .subscribe(
         createdPost => {
           post['id'] = createdPost.id;
-          this.posts.splice(0, 0, post);
         },
         (error: AppError) => {
+          this.posts.splice(0, 1);
           if (error instanceof BadInput) {
             console.log('bad input: ', error.originalError);
             this.form.setErrors(error.originalError); //set errors on form
