@@ -21,6 +21,8 @@ import {HttpModule} from '@angular/http';
 import {ImgurComponent} from './imgur/imgur.component';
 import {PostService} from './services/post.service';
 import {AppErrorHandler} from './common/app-error-handler';
+import {ToasterModule} from 'angular2-toaster';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import {AppErrorHandler} from './common/app-error-handler';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule,
+    ToasterModule
   ],
   providers: [
     PostService,

@@ -4,6 +4,7 @@ import {AppError} from '../common/app-error';
 import {NotFoundError} from '../common/not-found-error';
 import {BadInput} from '../common/bad-input-error';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {ToasterService} from 'angular2-toaster';
 
 @Component({
   selector: 'app-posts',
@@ -18,7 +19,7 @@ export class PostsComponent implements OnInit {
 
   errorOccured: boolean;
 
-  constructor(private service: PostService, fb: FormBuilder) {
+  constructor(private service: PostService, fb: FormBuilder, private toasterService: ToasterService) {
     this.form = fb.group({
       postTitle: ['', [Validators.required, Validators.minLength(5)]]
     });
@@ -36,6 +37,7 @@ export class PostsComponent implements OnInit {
       .subscribe(
         response => {
           this.posts = response.json();
+          this.toasterService.pop('success', 'SUCCESS!!', 'Content loaded, congratulations');
         });
   }
 
@@ -69,19 +71,20 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(post: any) {
-    this.service.deletePost(post.id)
-    //this.service.deletePost(345)
+    //this.service.deletePost(post.id)
+    this.service.deletePost(345)
       .subscribe(
         response => {
           const index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
         },
         (error: AppError) => {
-          if (error instanceof NotFoundError) {
+          throw error;
+          /*if (error instanceof NotFoundError) {
             alert('This post has already been deleted');
           } else {
             throw error;
-          }
+          }*/
         });
   }
 
