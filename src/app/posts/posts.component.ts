@@ -33,7 +33,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.errorOccured = false;
-    this.service.getPosts()
+    this.service.getAll()
       .subscribe(
         response => {
           this.posts = response.json();
@@ -61,7 +61,7 @@ export class PostsComponent implements OnInit {
 
   updatePost(post: any) {
     // update few properties instead of full object
-    this.service.markAsRead(post)
+    this.service.update(post)
       .subscribe(
         response => {
           const index = this.posts.indexOf(post);
@@ -72,7 +72,7 @@ export class PostsComponent implements OnInit {
 
   deletePost(post: any) {
     //this.service.deletePost(post.id)
-    this.service.deletePost(345)
+    this.service.delete(345)
       .subscribe(
         response => {
           const index = this.posts.indexOf(post);
@@ -93,7 +93,7 @@ export class PostsComponent implements OnInit {
   }
 
   private persist(post) {
-    this.service.createPost(post)
+    this.service.create(post)
       .subscribe(
         response => {
           post['id'] = response.json().id;
