@@ -23,6 +23,8 @@ import {PostService} from './services/post.service';
 import {AppErrorHandler} from './common/app-error-handler';
 import {ToasterModule} from 'angular2-toaster';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { GithubfollowersComponent } from './githubfollowers/githubfollowers.component';
+import {GithubService} from './services/github.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NewCourseFormComponentComponent,
     ChangePasswordFormComponent,
     PostsComponent,
-    ImgurComponent
+    ImgurComponent,
+    GithubfollowersComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   providers: [
     PostService,
+    GithubService,
     {
       provide: ErrorHandler, useClass: AppErrorHandler //use AppErrorHandler where ErrorHandler is used by Angular
     }
