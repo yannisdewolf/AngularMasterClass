@@ -72,7 +72,7 @@ import { GithubProfileComponent } from './github-profile/github-profile.componen
         component: GithubfollowersComponent
       },
       {
-        path: 'followers/:id', //none of the routes starts with /
+        path: 'followers/:id/:username', //none of the routes starts with /
         component: GithubProfileComponent
       },
       {
