@@ -5,7 +5,7 @@
   <div class="media">
     <img [src]="follower.avatar_url" alt="" class="d-flex mr-3" style="width: 80px; height: 80px; border-radius: 100%">
     <div class="media-body">
-      <h5 class="mt-0">{{follower.login}}</h5>
+      <h5 class="mt-0"><a [routerLink]="['/followers', follower.id]"> {{follower.login}}</a></h5>
       <a [href]="follower.html_url">{{follower.html_url}}</a>
     </div>
   </div>
